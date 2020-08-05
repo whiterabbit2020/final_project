@@ -5,7 +5,7 @@ import json
 
 app = Flask(__name__, static_url_path='/static')
 
-# Use flask_pymongo to set up mongo connection
+# Use test flask_pymongo to set up mongo connection
 app.config["MONGO_URI"] = "mongodb://localhost:27017/whods"
 # Set no-cache
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
