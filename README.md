@@ -32,4 +32,11 @@ Current world health and socio-ecomonic scenario drives lot of us to evaluate/co
 * ToDo
 
 ** Additional Graphs
+*** geographical data representation on the map for selected entity ( conuntry or world )
+*** slider (time) with the graph to see the progression.
+
+
 ** New features based on machine learning
+*** linear regression to see the trend along time
+**** total period 
+**** 
