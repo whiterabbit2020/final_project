@@ -28,3 +28,8 @@ Current world health and socio-ecomonic scenario drives lot of us to evaluate/co
   * start the __*mongodb*__
   * be in the checkout directory
   * execute command __*python app.py*__ , that should get you the url for the server copy nd paste ythe url in your browser, preferablly incognito.
+
+* ToDo
+
+** Additional Graphs
+** New features based on machine learning
