@@ -23,20 +23,43 @@ https://covid19.who.int/
 
 Current world health and socio-ecomonic scenario drives lot of us to evaluate/correlate and finding patterns across the globe, that could be leveraged for now and in the future to handle the situation effectively. 
 
-* to run the code 
-  * download the code
-  * start the __*mongodb*__
-  * be in the checkout directory
-  * execute command __*python app.py*__ , that should get you the url for the server copy nd paste ythe url in your browser, preferablly incognito.
 
-* ToDo
-
-** Additional Graphs
-*** geographical data representation on the map for selected entity ( conuntry or world )
-*** slider (time) with the graph to see the progression.
+* number of fatalities with covid v/s without covid - Siraj
+* fatalities with covid v/s top non covid. - Alan
+* fatalities rate over time, related to covid. - Atul
+* fatalities over geographical location - Chad/Siraj
+* fatalities v/s age group - Ganga/
+* fatalities v/s poverty. Atul/Alan
 
 
-** New features based on machine learning
-*** linear regression to see the trend along time
-**** total period 
-**** 
+### Highlevel Steps
+
+* mongo/mysql DB
+* library/reuse code/may be OO
+* graphical represntation 
+* final presentation 
+
+### Development steps
+
+* Presentation - Chad
+
+* MangoDB / Flask - Siraj
+    - Load Json files into MongoDB database - done 
+    - Create Flask app - python
+    - Data injection
+    
+  Frontend -- Alan, Atul, Ganga
+    * HTML page (bootstrap) 
+    * Java script
+    * Static page + js
+
+GUI Output:
+* Project info  + description 
+* 3 graphs - interative / 3 tabs
+    - Time vs Death rate per million ( x = date, y = death rate )
+    - Time vs Number of cases per million ( x = date, y = cases per million )
+    - Time v/s stringency 
+    - Pre existing condition vs Death rate
+     ????  vs ????
+
+* Conclution

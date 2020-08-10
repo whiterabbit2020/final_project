@@ -48,7 +48,7 @@ function bubbleChart(selected) {
         sizes.push(data[selected[i]]["hospital_beds_per_thousand"] * 15);
         let red = Math.floor(Math.random() * 256);
         let green = Math.floor(Math.random() * 256);
-        let blue = Math.floor(Math.random() * 255);
+        let blue = Math.floor(Math.random() * 256);
         colors.push(`rgb(${red},${green},${blue})`);
     }
     var trace = {
@@ -76,4 +76,45 @@ function bubbleChart(selected) {
     };
 
     Plotly.newPlot('plotCompare', plotData, layout);
+}
+
+function bubbleCustom(selected, selected_x, selected_y) {
+    x_axis = [];
+    y_axis = [];
+    texts = [];
+    colors = [];
+    for (i = 0; i < selected.length; i++) {
+        x_axis.push(data[selected[i]][selected_x]);
+        y_axis.push(data[selected[i]][selected_y]);
+        texts.push(data[selected[i]]["location"]);
+        let red = Math.floor(Math.random() * 256);
+        let green = Math.floor(Math.random() * 256);
+        let blue = Math.floor(Math.random() * 256);
+        colors.push(`rgb(${red},${green},${blue})`);
+    }
+    var trace = {
+        x: x_axis,
+        y: y_axis,
+        text: texts,
+        mode: 'markers',
+        marker: {
+            size: 15,
+            color: colors
+        },
+        type: 'scatter',
+        xaxis: {
+            title: {'text': `${selected_x}`}
+        },
+        yaxis: {
+            title: {'text': `${selected_y}`}
+        }
+    };
+    var plotData = [trace];
+
+    var layout = {
+        width: 700,
+        height: 350
+    };
+
+    Plotly.newPlot('plotCustom', plotData, layout);
 }
