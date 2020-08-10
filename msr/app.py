@@ -34,10 +34,15 @@ def refresh():
     covid_19.insert_many(mongo_data)
     return redirect("/", code=302)
 
-@app.route("/<country>/<month>/<day>/<year>")
+@app.route("/predict/<country>/<month>/<day>/<year>")
 def cases_prediction(country, month, day, year):
     u_date = f'{month}/{day}/{year}'
-    prediction = predict.predict_cases(country=country, u_date=u_date)
+    cases = predict.predict_cases(country=country, u_date=u_date)
+    deaths = predict.predict_deaths(country=country, u_date=u_date)
+    prediction = {
+        "cases": cases,
+        "deaths": deaths
+    }
     return jsonify(prediction)
 
 
