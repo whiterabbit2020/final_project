@@ -1,7 +1,8 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, jsonify
 from flask_pymongo import PyMongo
 import requests
 import json
+import predict
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -32,6 +33,12 @@ def refresh():
     covid_19.delete_many({})
     covid_19.insert_many(mongo_data)
     return redirect("/", code=302)
+
+@app.route("/<country>/<month>/<day>/<year>")
+def cases_prediction(country, month, day, year):
+    u_date = f'{month}/{day}/{year}'
+    prediction = predict.predict_cases(country=country, u_date=u_date)
+    return jsonify(prediction)
 
 
 if __name__ == "__main__":
