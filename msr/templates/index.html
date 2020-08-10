@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>COVID-19 | An Analysis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body>
+    <!-- Jumbotron -->
+    <div class="container text-center">
+        <h1 style="color: darkblue"><strong>COVID-19</strong></h1>
+        <h5 style="color:lightseagreen"><em>An analysis of a human tragedy</em></h5>
+        <br />
+    </div>
+
+    <!-- Container Begins -->
+    <div class="container">
+        <hr color="orange" />
+        <div class="row">
+            <div class="col-lg-6 text-right">
+                Selected Location(s):
+            </div>
+            <div class="col-lg-6">
+                <p id="locList" class="font-weight-bold"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <form>
+                    <div class="form-group">
+                        <label for="selLocation"><strong>SELECT LOCATION(S):</strong></label>
+                        <select id="selLocation" class="custom-select" multiple size=13></select>
+                        <small id="countryHelp" class="form-text text-muted">Ctrl + click to select multiple</small>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-9">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="deaths-tab" data-toggle="tab" href="#plotDeaths" role="tab"
+                            aria-controls="plotDeaths" aria-selected="true">Deaths Per Million</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="cases-tab" data-toggle="tab" href="#plotCases" role="tab"
+                            aria-controls="plotCases" aria-selected="false">Cases Per Million</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="gdpBeds-tab" data-toggle="tab" href="#plotCompare" role="tab"
+                            aria-controls="plotCompare" aria-selected="false">GDP vs. Hospital Beds</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tab" data-toggle="tab" href="#customTab" role="tab"
+                            aria-controls="customTab" aria-selected="false">Custom</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="predict-tab" data-toggle="tab" href="#predictTab" role="tab"
+                            aria-controls="predictTab" aria-selected="true">Predict Total Cases</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="plotDeaths" role="tabpanel" aria-labelledby="deaths-tab">
+                    </div>
+                    <div class="tab-pane fade" id="plotCases" role="tabpanel" aria-labelledby="cases-tab"></div>
+                    <div class="tab-pane fade" id="plotCompare" role="tabpanel" aria-labelledby="gdpBeds-tab"></div>
+                    <div class="tab-pane fade" id="customTab" role="tabpanel" aria-labelledby="custom-tab">
+                        <div class="row">
+                            <div class="col-lg-3 mt-2">
+                                <form class="form-inline">
+                                    <label class="mb-sm-2">Select Axes:</label>
+                                    <select class="custom-select mb-2 custom-select-sm" id="selectX"></select>
+                                    <select class="custom-select mb-2 custom-select-sm" id="selectY"></select>
+                                    <a id="customSubmit" class="btn btn-info btn-sm" href="#">Go</a>
+                                </form>
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="col-lg-12 mt-2" id="plotCustom"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="predictTab" role="tabpanel" aria-labelledby="predict-tab">
+                        <div class="row">
+                            <div class="col-lg-12 mt-2">
+                                <form class="form-inline">
+                                    <label class="mb-sm-2 mr-2">Select Location and Date: </label>
+                                    <select class="custom-select mb-2 mr-2 custom-select-sm" id="selectCountry"></select>
+                                    <input type="text" class="mb-2 mr-2" id="selectDate">
+                                    <a id="predictSubmit" class="btn btn-info btn-sm mb-sm-2" href="#">Go</a>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 mt-5">
+                                <p id="predictedCases"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 text-right py-2">
+                <p class="font-italic">Last Updated: <span id="lastUpdated"></span></p>
+            </div>
+            <div class="col-lg-6 mr-auto">
+                <a class="btn btn-info" href="/refresh">Refresh</a>
+            </div>
+        </div>
+        <hr color="orange" style="margin-top: 10px; margin-bottom: 10px;" />
+        <footer class="text-center text-muted" style="margin: 10px;">&copy; WhiteRabbit 2020</footer>
+    </div>
+    <!-- Container Ends -->
+    <script type="text/javascript">
+        data = {{ covid_data | safe }};
+        console.log(`Retreived data for ${Object.keys(data).length} locations`);
+    </script>
+    <script src="/static/js/plot.js"></script>
+    <script src="/static/js/script.js"></script>
+</body>
+
+</html>
